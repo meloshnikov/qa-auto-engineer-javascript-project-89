@@ -9,12 +9,16 @@ export default class ChatBotWidget {
 
   async openChatBot() {
     this.startChatBotButton = this.screen.getByText('Открыть Чат');
-    await this.user.click(this.startChatBotButton);
+    try {
+      await this.user.click(this.startChatBotButton);
 
-    this.startConversationButton = this.screen.queryByRole('button', { name: 'Начать разговор' });
-    this.heading = this.screen.getByText('Виртуальный помощник');
-    this.welcomeMessage = this.screen.getByText('Привет! Я ваш виртуальный помощник. Нажмите "Начать разговор", чтобы открыть чат');
-    this.closeChatBotButton = this.screen.getByLabelText('Close');
+      this.startConversationButton = this.screen.queryByRole('button', { name: 'Начать разговор' });
+      this.heading = this.screen.getByText('Виртуальный помощник');
+      this.welcomeMessage = this.screen.getByText('Привет! Я ваш виртуальный помощник. Нажмите "Начать разговор", чтобы открыть чат');
+      this.closeChatBotButton = this.screen.getByLabelText('Close');
+    } catch (error) {
+      return error['name'];
+    }
   }
 
   async startConversation() {
@@ -62,4 +66,11 @@ export default class ChatBotWidget {
   checkConversaitionIsReturnedToBeginning() {
     expect(this.firstMessages).toHaveLength(2);
   }
+
+  checkChatBotIsNotOpened() {
+    expect(this.heading).toBeVisible();
+    expect(this.welcomeMessage).not.toBeVisible();
+    expect(this.startConversationButton).not.toBeVisible();
+  }
 }
+

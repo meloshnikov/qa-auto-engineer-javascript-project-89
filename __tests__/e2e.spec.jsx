@@ -1,8 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Widget from '@hexlet/chatbot-v2';
 import { vi, test, describe, beforeEach, beforeAll, expect } from "vitest";
 import ChatBotWidget from './models/chatBotWidget';
-import steps from '../__fixtures__/default';
+import steps from '../__fixtures__/defaultSteps';
+import unsupportedSteps from '../__fixtures__/unsupportedSteps';
+import emptySteps from '../__fixtures__/emptySteps';
 
 let widget;
 let mockScroll;
@@ -12,11 +14,14 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
-  render(Widget(steps));
   widget = new ChatBotWidget(screen);
 });
 
 describe("Positive scenarios", async () => {
+
+  beforeEach(() => {
+    render(Widget(steps));
+  });
 
   test('Test chat bot rendered', async () => {
     await widget.openChatBot();
@@ -61,5 +66,20 @@ describe("Positive scenarios", async () => {
 
     widget.checkChatBotIsClosed();
   });
+});
 
+describe("Negative scenarios)", () => {
+
+  test("Crashes when unsupportet steps format was passed", async () => {
+    await waitFor(() => {
+      expect(() => {
+        render(Widget(unsupportedSteps));
+      }).toThrow(/e is not iterable/i);
+    });
+  });
+
+  test("Should show empty chat window when empty steps array was passed", async () => {
+    render(Widget(emptySteps));
+    expect(await widget.openChatBot()).toMatch('TestingLibraryElementError');
+  });
 });
