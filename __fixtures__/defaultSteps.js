@@ -1,4 +1,5 @@
-const steps = [
+
+export default [
   {
     id: 'welcome',
     messages: [
@@ -142,5 +143,3 @@ const steps = [
     ]
   },
 ];
-
-export default steps;

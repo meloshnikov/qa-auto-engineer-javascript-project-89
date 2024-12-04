@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Widget from '@hexlet/chatbot-v2';
 import '@hexlet/chatbot-v2/styles';
-import steps from '../__fixtures__/default';
+import steps from '../__fixtures__/defaultSteps';
 
 const initialState = {
   email: "",
