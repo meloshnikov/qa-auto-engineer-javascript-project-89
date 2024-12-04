@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import Widget from '@hexlet/chatbot-v2';
 import { vi, test, describe, beforeEach, beforeAll, expect } from "vitest";
-import ChatBotWidget from '../models/chatBotWidget';
-import steps from '../../__fixtures__/default';
+import ChatBotWidget from './models/chatBotWidget';
+import steps from '../__fixtures__/default';
 
 let widget;
 let mockScroll;
