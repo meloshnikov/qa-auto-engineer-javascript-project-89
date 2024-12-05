@@ -1,5 +1,5 @@
-import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
+import userEvent from '@testing-library/user-event';
 
 export default class ChatBotWidget {
   constructor(screen) {
@@ -7,6 +7,7 @@ export default class ChatBotWidget {
     this.user = userEvent.setup();
   }
 
+  /* eslint-disable consistent-return */
   async openChatBot() {
     this.startChatBotButton = this.screen.getByText('Открыть Чат');
     try {
@@ -17,7 +18,7 @@ export default class ChatBotWidget {
       this.welcomeMessage = this.screen.getByText('Привет! Я ваш виртуальный помощник. Нажмите "Начать разговор", чтобы открыть чат');
       this.closeChatBotButton = this.screen.getByLabelText('Close');
     } catch (error) {
-      return error['name'];
+      return error.name;
     }
   }
 
@@ -66,11 +67,4 @@ export default class ChatBotWidget {
   checkConversaitionIsReturnedToBeginning() {
     expect(this.firstMessages).toHaveLength(2);
   }
-
-  checkChatBotIsNotOpened() {
-    expect(this.heading).toBeVisible();
-    expect(this.welcomeMessage).not.toBeVisible();
-    expect(this.startConversationButton).not.toBeVisible();
-  }
 }
-

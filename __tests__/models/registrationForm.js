@@ -16,7 +16,6 @@ export default class RegistrationForm {
     country,
     confirmationCheckBox,
   }) {
-
     this.emailInput = this.screen.getByLabelText('Email');
     this.passwordInput = this.screen.getByLabelText('Пароль');
     this.addressInput = this.screen.getByLabelText('Адрес');

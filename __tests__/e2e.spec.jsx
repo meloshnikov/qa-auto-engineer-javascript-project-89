@@ -1,5 +1,6 @@
+import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
-import Widget from '@hexlet/chatbot-v2';
+import Widget from "@hexlet/chatbot-v2";
 import { vi, test, describe, beforeEach, beforeAll, expect } from "vitest";
 import ChatBotWidget from './models/chatBotWidget';
 import steps from '../__fixtures__/defaultSteps';
